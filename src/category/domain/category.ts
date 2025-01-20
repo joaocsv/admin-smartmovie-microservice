@@ -1,4 +1,6 @@
-import { UuidValueObject } from '../../shared/value-object/uuid.value.object'
+import { EntityValidationError } from '../../shared/domain/validators/validation.error'
+import { UuidValueObject } from '../../shared/domain/value-object/uuid.value.object'
+import { CategoryValidatorFactory } from './category.validator'
 
 export type CategoryProperties = {
   categoryId?: UuidValueObject;
@@ -30,19 +32,23 @@ export class Category {
   }
 
   public static create (command: CreateCategoryCommand): Category {
-    return new Category({
+    const category = new Category({
       name: command.name,
       description: command.description,
       isActive: command.isActive
     });
+    Category.validate(category);
+    return category;
   }
 
   changeName(name: string): void {
     this.name = name;
+    Category.validate(this);
   }
 
   changeDescription(description: string): void {
     this.description = description;
+    Category.validate(this);
   }
 
   activate() {
@@ -51,6 +57,14 @@ export class Category {
 
   deactivate() {
     this.isActive = false;
+  }
+
+  static validate(entity: Category) {
+    const validator = CategoryValidatorFactory.create();
+    const isValid = validator.validate(entity);
+    if (!isValid) {
+      throw new EntityValidationError(validator.errors);
+    }
   }
 
   toJson() {

@@ -1,7 +1,12 @@
-import { UuidValueObject } from '../../../shared/value-object/uuid.value.object'
+import { UuidValueObject } from '../../../shared/domain/value-object/uuid.value.object'
 import { Category } from '../category'
 
 describe('Category unit tests', () => {
+  let validateSpy: any;
+  beforeEach(() => {
+    validateSpy = jest.spyOn(Category, "validate");
+  });
+
   describe("constructor", () => {
     test("should create a category with default values", () => {
       const category = new Category({
@@ -53,6 +58,7 @@ describe('Category unit tests', () => {
       expect(category.description).toBeNull();
       expect(category.isActive).toBe(true);
       expect(category.createdAt).toBeInstanceOf(Date);
+      expect(validateSpy).toHaveBeenCalledTimes(1);
     });
 
     test("should create a category with description", () => {
@@ -65,6 +71,7 @@ describe('Category unit tests', () => {
       expect(category.description).toBe("some description");
       expect(category.isActive).toBe(true);
       expect(category.createdAt).toBeInstanceOf(Date);
+      expect(validateSpy).toHaveBeenCalledTimes(1);
     });
 
     test("should create a category with isActive", () => {
@@ -77,6 +84,7 @@ describe('Category unit tests', () => {
       expect(category.description).toBeNull();
       expect(category.isActive).toBe(false);
       expect(category.createdAt).toBeInstanceOf(Date);
+      expect(validateSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -104,6 +112,7 @@ describe('Category unit tests', () => {
     });
     category.changeName("other name");
     expect(category.name).toBe("other name");
+    expect(validateSpy).toHaveBeenCalledTimes(2);
   });
 
   test("should change description", () => {
@@ -112,6 +121,7 @@ describe('Category unit tests', () => {
     });
     category.changeDescription("some description");
     expect(category.description).toBe("some description");
+    expect(validateSpy).toHaveBeenCalledTimes(2);
   });
 
   test("should active a category", () => {
