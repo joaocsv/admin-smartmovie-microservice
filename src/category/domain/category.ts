@@ -1,5 +1,7 @@
+import { Entity } from '../../shared/domain/entity'
 import { EntityValidationError } from '../../shared/domain/validators/validation.error'
 import { UuidValueObject } from '../../shared/domain/value-object/uuid.value.object'
+import { ValueObject } from '../../shared/domain/value.object'
 import { CategoryValidatorFactory } from './category.validator'
 
 export type CategoryProperties = {
@@ -16,7 +18,7 @@ export type CreateCategoryCommand = {
   isActive?: boolean;
 }
 
-export class Category {
+export class Category extends Entity {
   categoryId: UuidValueObject;
   name: string;
   description: string | null;
@@ -24,6 +26,7 @@ export class Category {
   createdAt: Date;
 
   constructor (properties: CategoryProperties) {
+    super()
     this.categoryId = properties.categoryId ?? new UuidValueObject();
     this.name = properties.name;
     this.description = properties.description ?? null;
@@ -39,6 +42,10 @@ export class Category {
     });
     Category.validate(category);
     return category;
+  }
+
+  get entityId(): ValueObject {
+    return this.categoryId
   }
 
   changeName(name: string): void {
@@ -67,7 +74,7 @@ export class Category {
     }
   }
 
-  toJson() {
+  toJSON() {
     return {
       categoryId: this.categoryId,
       name: this.name,
