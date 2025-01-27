@@ -1,7 +1,7 @@
-import { Entity } from '../../entity'
-import { NotFoundError } from '../../errors/not.found.error'
-import { UuidValueObject } from '../../value-object/uuid.value.object'
-import { InMemoryRepository } from './in.memory.repository'
+import { Entity } from '../../../entity'
+import { NotFoundError } from '../../../errors/not.found.error'
+import { UuidValueObject } from '../../../value-object/uuid.value.object'
+import { InMemoryRepository } from '../in.memory.repository'
 
 type StubEntityConstructor = {
   entity_id?: UuidValueObject;
