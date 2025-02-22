@@ -1,4 +1,4 @@
-import { Category } from '../../domain/category'
+import { Category } from '../../../domain/category'
 import { CategoryInMemoryRepository } from './category.in.memory.repository'
 
 describe("CategoryInMemoryRepository", () => {
@@ -27,7 +27,7 @@ describe("CategoryInMemoryRepository", () => {
     expect(itemsFiltered).toStrictEqual([items[0], items[1]]);
   });
 
-  it("should sort by created_at when sort param is null", async () => {
+  it("should sort by createdAt when sort param is null", async () => {
     const createdAt = new Date();
 
     const items = [

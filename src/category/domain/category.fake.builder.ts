@@ -5,7 +5,6 @@ import { Category } from './category'
 type PropOrFactory<T> = T | ((index: number) => T);
 
 export class CategoryFakeBuilder<TBuild = any> {
-  // auto generated in entity
   private _categoryId: PropOrFactory<UuidValueObject> | undefined = undefined;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _name: PropOrFactory<string> = (_index) => this.chance.word();
@@ -81,7 +80,7 @@ export class CategoryFakeBuilder<TBuild = any> {
           description: this.callFactory(this._description, index),
           isActive: this.callFactory(this._isActive, index),
           ...(this._createdAt && {
-            _createdAt: this.callFactory(this._createdAt, index),
+            createdAt: this.callFactory(this._createdAt, index),
           }),
         });
         Category.validate(category);

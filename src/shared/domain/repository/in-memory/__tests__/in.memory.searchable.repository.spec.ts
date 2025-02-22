@@ -1,7 +1,7 @@
 import { Entity } from '../../../../domain/entity';
 import { UuidValueObject } from '../../../value-object/uuid.value.object'
-import { SearchInput } from '../../search.input'
-import { SearchOutput } from '../../search.output'
+import { SearchParameters } from '../../search.parameters'
+import { SearchResponse } from '../../search.response'
 import { InMemorySearchableRepository } from '../in.memory.repository'
 
 type StubEntityConstructorProps = {
@@ -153,9 +153,9 @@ describe('InMemorySearchableRepository Unit Tests', () => {
       const items = Array(16).fill(entity);
       repository.entities = items;
 
-      const result = await repository.search(new SearchInput());
+      const result = await repository.search(new SearchParameters());
       expect(result).toStrictEqual(
-        new SearchOutput({
+        new SearchResponse({
           items: Array(15).fill(entity),
           total: 16,
           currentPage: 1,
@@ -174,10 +174,10 @@ describe('InMemorySearchableRepository Unit Tests', () => {
       repository.entities = items;
 
       let result = await repository.search(
-        new SearchInput({ page: 1, perPage: 2, filter: 'TEST' }),
+        new SearchParameters({ page: 1, perPage: 2, filter: 'TEST' }),
       );
       expect(result).toStrictEqual(
-        new SearchOutput({
+        new SearchResponse({
           items: [items[0], items[2]],
           total: 3,
           currentPage: 1,
@@ -186,10 +186,10 @@ describe('InMemorySearchableRepository Unit Tests', () => {
       );
 
       result = await repository.search(
-        new SearchInput({ page: 2, perPage: 2, filter: 'TEST' }),
+        new SearchParameters({ page: 2, perPage: 2, filter: 'TEST' }),
       );
       expect(result).toStrictEqual(
-        new SearchOutput({
+        new SearchResponse({
           items: [items[3]],
           total: 3,
           currentPage: 2,
@@ -208,12 +208,12 @@ describe('InMemorySearchableRepository Unit Tests', () => {
       ];
       const arrange = [
         {
-          search_params: new SearchInput({
+          search_params: new SearchParameters({
             page: 1,
             perPage: 2,
             sort: 'name',
           }),
-          search_result: new SearchOutput({
+          search_result: new SearchResponse({
             items: [items[1], items[0]],
             total: 5,
             currentPage: 1,
@@ -221,12 +221,12 @@ describe('InMemorySearchableRepository Unit Tests', () => {
           }),
         },
         {
-          search_params: new SearchInput({
+          search_params: new SearchParameters({
             page: 2,
             perPage: 2,
             sort: 'name',
           }),
-          search_result: new SearchOutput({
+          search_result: new SearchResponse({
             items: [items[4], items[2]],
             total: 5,
             currentPage: 2,
@@ -234,13 +234,13 @@ describe('InMemorySearchableRepository Unit Tests', () => {
           }),
         },
         {
-          search_params: new SearchInput({
+          search_params: new SearchParameters({
             page: 1,
             perPage: 2,
             sort: 'name',
             sortDir: 'desc',
           }),
-          search_result: new SearchOutput({
+          search_result: new SearchResponse({
             items: [items[3], items[2]],
             total: 5,
             currentPage: 1,
@@ -248,13 +248,13 @@ describe('InMemorySearchableRepository Unit Tests', () => {
           }),
         },
         {
-          search_params: new SearchInput({
+          search_params: new SearchParameters({
             page: 2,
             perPage: 2,
             sort: 'name',
             sortDir: 'desc',
           }),
-          search_result: new SearchOutput({
+          search_result: new SearchResponse({
             items: [items[4], items[0]],
             total: 5,
             currentPage: 2,
@@ -288,13 +288,13 @@ describe('InMemorySearchableRepository Unit Tests', () => {
 
       const arrange = [
         {
-          params: new SearchInput({
+          params: new SearchParameters({
             page: 1,
             perPage: 2,
             sort: 'name',
             filter: 'TEST',
           }),
-          result: new SearchOutput({
+          result: new SearchResponse({
             items: [items[2], items[4]],
             total: 3,
             currentPage: 1,
@@ -302,13 +302,13 @@ describe('InMemorySearchableRepository Unit Tests', () => {
           }),
         },
         {
-          params: new SearchInput({
+          params: new SearchParameters({
             page: 2,
             perPage: 2,
             sort: 'name',
             filter: 'TEST',
           }),
-          result: new SearchOutput({
+          result: new SearchResponse({
             items: [items[0]],
             total: 3,
             currentPage: 2,

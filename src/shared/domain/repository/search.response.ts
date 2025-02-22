@@ -1,21 +1,21 @@
 import { Entity } from "../entity";
 import { ValueObject } from '../value.object'
 
-type SearchOutputConstructorProps<E extends Entity> = {
+type SearchResponseConstructorProps<E extends Entity> = {
   items: E[];
   total: number;
   currentPage: number;
   perPage: number;
 };
 
-export class SearchOutput<A extends Entity = Entity> extends ValueObject {
+export class SearchResponse<A extends Entity = Entity> extends ValueObject {
   readonly items: A[];
   readonly total: number;
   readonly currentPage: number;
   readonly perPage: number;
   readonly lastPage: number;
 
-  constructor(props: SearchOutputConstructorProps<A>) {
+  constructor(props: SearchResponseConstructorProps<A>) {
     super();
     this.items = props.items;
     this.total = props.total;
@@ -30,9 +30,9 @@ export class SearchOutput<A extends Entity = Entity> extends ValueObject {
         ? this.items.map((item) => item.toJSON())
         : this.items,
       total: this.total,
-      current_page: this.currentPage,
-      per_page: this.perPage,
-      last_page: this.lastPage,
+      currentPage: this.currentPage,
+      perPage: this.perPage,
+      lastPage: this.lastPage,
     };
   }
 }

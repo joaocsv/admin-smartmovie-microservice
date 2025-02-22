@@ -1,7 +1,7 @@
 import { Entity } from '../../shared/domain/entity'
 import { EntityValidationError } from '../../shared/domain/validators/validation.error'
 import { UuidValueObject } from '../../shared/domain/value-object/uuid.value.object'
-import { ValueObject } from '../../shared/domain/value.object'
+import { CategoryFakeBuilder } from './category.fake.builder'
 import { CategoryValidatorFactory } from './category.validator'
 
 export type CategoryProperties = {
@@ -44,7 +44,7 @@ export class Category extends Entity {
     return category;
   }
 
-  get entityId(): ValueObject {
+  get entityId(): UuidValueObject {
     return this.categoryId
   }
 
@@ -64,6 +64,10 @@ export class Category extends Entity {
 
   deactivate() {
     this.isActive = false;
+  }
+
+  static fake(): typeof CategoryFakeBuilder {
+    return CategoryFakeBuilder;
   }
 
   static validate(entity: Category) {

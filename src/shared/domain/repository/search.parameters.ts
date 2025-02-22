@@ -10,7 +10,7 @@ export type SearchInputConstructorProps<Filter = string> = {
   filter?: Filter | null;
 };
 
-export class SearchInput<Filter = string> extends ValueObject {
+export class SearchParameters<Filter = string> extends ValueObject {
   protected _page: number;
   protected _perPage: number = 15;
   protected _sort: string | null;
