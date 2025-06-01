@@ -119,14 +119,18 @@ describe("CategorySequelizeRepository Integration Test", () => {
       const created_at = new Date();
       const categories = Category.fake()
         .theCategories(16)
-        .withName("Movie")
+        .withName((index) => `Movie ${index}`)
         .withDescription(null)
         .withCreatedAt((index) => new Date(created_at.getTime() + index))
         .build();
+
+      await repository.bulkInsert(categories);
+        
       const searchOutput = await repository.search(new CategorySearchParams());
       const items = searchOutput.items;
-      [...items].reverse().forEach((item, index) => {
-        expect(`${item.name}`).toBe(`${categories[index + 1].name}`);
+      
+      [...items].reverse().forEach((_, index) => {
+        expect(`Movie ${index}`).toBe(`${categories[index].name}`);
       });
     });
     it("should apply paginate and filter", async () => {
@@ -160,7 +164,6 @@ describe("CategorySequelizeRepository Integration Test", () => {
           filter: "TEST",
         })
       );
-      console.log(searchOutput.toJSON(true));
       expect(searchOutput.toJSON(true)).toMatchObject(
         new CategorySearchResult({
           items: [categories[0], categories[2]],

@@ -26,8 +26,8 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     )
   }
   async insert(entity: Category): Promise<void> {
-    const model = CategoryModelMapper.toModel(entity)
-    await this.categoryModel.create(model.toJSON())
+    const modelProps = CategoryModelMapper.toModel(entity)
+    await this.categoryModel.create(modelProps.toJSON())
   }
 
   async update(entity: Category): Promise<void> {
@@ -36,8 +36,8 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     if (!model) {
       throw new NotFoundError(id, this.getEntity())
     }
-    const modelToUpdate = CategoryModelMapper.toModel(entity)
-    await this.categoryModel.update(modelToUpdate.toJSON(), { where: { category_id: id } })
+    const modelProps = CategoryModelMapper.toModel(entity)
+    await this.categoryModel.update(modelProps.toJSON(), { where: { category_id: id } })
   }
 
   async delete(entityId: UuidValueObject): Promise<void> {
