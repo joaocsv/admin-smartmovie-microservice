@@ -1,11 +1,11 @@
 import { Entity } from '../../shared/domain/entity'
 import { EntityValidationError } from '../../shared/domain/validators/validation.error'
-import { UuidValueObject } from '../../shared/domain/value-object/uuid.value.object'
+import { Uuid } from '../../shared/domain/value-object/uuid'
 import { CategoryFakeBuilder } from './category.fake.builder'
 import { CategoryValidatorFactory } from './category.validator'
 
 export type CategoryProperties = {
-  categoryId?: UuidValueObject;
+  categoryId?: Uuid;
   name: string;
   description?: string | null;
   isActive?: boolean;
@@ -19,7 +19,7 @@ export type CreateCategoryCommand = {
 }
 
 export class Category extends Entity {
-  categoryId: UuidValueObject;
+  categoryId: Uuid;
   name: string;
   description: string | null;
   isActive: boolean;
@@ -27,7 +27,7 @@ export class Category extends Entity {
 
   constructor (properties: CategoryProperties) {
     super()
-    this.categoryId = properties.categoryId ?? new UuidValueObject();
+    this.categoryId = properties.categoryId ?? new Uuid();
     this.name = properties.name;
     this.description = properties.description ?? null;
     this.isActive = properties.isActive ?? true;
@@ -44,7 +44,7 @@ export class Category extends Entity {
     return category;
   }
 
-  get entityId(): UuidValueObject {
+  get entityId(): Uuid {
     return this.categoryId
   }
 
@@ -80,7 +80,7 @@ export class Category extends Entity {
 
   toJSON() {
     return {
-      categoryId: this.categoryId,
+      categoryId: this.categoryId.value,
       name: this.name,
       description: this.description,
       isActive: this.isActive,

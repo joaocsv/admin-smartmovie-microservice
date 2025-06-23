@@ -1,11 +1,11 @@
-import { UuidValueObject } from '../../../../shared/domain/value-object/uuid.value.object'
+import { Uuid } from '../../../../shared/domain/value-object/uuid'
 import { Category } from '../../../domain/category'
 import { CategoryModel } from './category.model'
 
 export class CategoryModelMapper {
   static toEntity (model: CategoryModel): Category {
     const entity = new Category({
-      categoryId: new UuidValueObject(model.category_id),
+      categoryId: new Uuid(model.category_id),
       name: model.name,
       description: model.description,
       isActive: model.is_active,

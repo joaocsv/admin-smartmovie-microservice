@@ -1,22 +1,22 @@
 import { Entity } from '../../../../domain/entity';
-import { UuidValueObject } from '../../../value-object/uuid.value.object'
+import { Uuid } from '../../../value-object/uuid'
 import { SearchParameters } from '../../search.parameters'
 import { SearchResponse } from '../../search.response'
 import { InMemorySearchableRepository } from '../in.memory.repository'
 
 type StubEntityConstructorProps = {
-  entity_id?: UuidValueObject;
+  entity_id?: Uuid;
   name: string;
   price: number;
 };
 
 class StubEntity extends Entity {
-  entityId: UuidValueObject;
+  entityId: Uuid;
   name: string;
   price: number;
   constructor(props: StubEntityConstructorProps) {
     super();
-    this.entityId = props.entity_id ?? new UuidValueObject();
+    this.entityId = props.entity_id ?? new Uuid();
     this.name = props.name;
     this.price = +props.price;
   }
@@ -32,7 +32,7 @@ class StubEntity extends Entity {
 
 class StubInMemorySearchableRepository extends InMemorySearchableRepository<
   StubEntity,
-  UuidValueObject
+  Uuid
 > {
   sortableFields: string[] = ['name'];
 

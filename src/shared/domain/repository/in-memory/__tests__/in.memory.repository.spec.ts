@@ -1,22 +1,22 @@
 import { Entity } from '../../../entity'
 import { NotFoundError } from '../../../errors/not.found.error'
-import { UuidValueObject } from '../../../value-object/uuid.value.object'
+import { Uuid } from '../../../value-object/uuid'
 import { InMemoryRepository } from '../in.memory.repository'
 
 type StubEntityConstructor = {
-  entity_id?: UuidValueObject;
+  entity_id?: Uuid;
   name: string;
   price: number;
 };
 
 class StubEntity extends Entity {
-  entityId: UuidValueObject;
+  entityId: Uuid;
   name: string;
   price: number;
 
   constructor(props: StubEntityConstructor) {
     super();
-    this.entityId = props.entity_id || new UuidValueObject();
+    this.entityId = props.entity_id || new Uuid();
     this.name = props.name;
     this.price = props.price;
   }
@@ -30,7 +30,7 @@ class StubEntity extends Entity {
   }
 }
 
-class StubInMemoryRepository extends InMemoryRepository<StubEntity, UuidValueObject> {
+class StubInMemoryRepository extends InMemoryRepository<StubEntity, Uuid> {
   getEntity(): new (...args: any[]) => StubEntity {
     return StubEntity;
   }
@@ -45,7 +45,7 @@ describe("InMemoryRepository Unit Tests", () => {
 
   test("should insert a new entity", async () => {
     const entity = new StubEntity({
-      entity_id: new UuidValueObject(),
+      entity_id: new Uuid(),
       name: "Test",
       price: 100,
     });
@@ -59,12 +59,12 @@ describe("InMemoryRepository Unit Tests", () => {
   test("should bulk insert entities", async () => {
     const entities = [
       new StubEntity({
-        entity_id: new UuidValueObject(),
+        entity_id: new Uuid(),
         name: "Test",
         price: 100,
       }),
       new StubEntity({
-        entity_id: new UuidValueObject(),
+        entity_id: new Uuid(),
         name: "Test",
         price: 100,
       }),
@@ -107,13 +107,13 @@ describe("InMemoryRepository Unit Tests", () => {
   });
 
   it("should throws error on delete when entity not found", async () => {
-    const uuid = new UuidValueObject();
+    const uuid = new Uuid();
     await expect(repo.delete(uuid)).rejects.toThrow(
       new NotFoundError(uuid.value, StubEntity)
     );
 
     await expect(
-      repo.delete(new UuidValueObject("9366b7dc-2d71-4799-b91c-c64adb205104"))
+      repo.delete(new Uuid("9366b7dc-2d71-4799-b91c-c64adb205104"))
     ).rejects.toThrow(
       new NotFoundError("9366b7dc-2d71-4799-b91c-c64adb205104", StubEntity)
     );

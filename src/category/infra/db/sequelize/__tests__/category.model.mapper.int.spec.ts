@@ -3,20 +3,11 @@ import { EntityValidationError } from "../../../../../shared/domain/validators/v
 import { CategoryModel } from "../category.model";
 import { CategoryModelMapper } from '../category.model.mapper'
 import { Category } from '../../../../domain/category'
-import { UuidValueObject } from '../../../../../shared/domain/value-object/uuid.value.object'
+import { Uuid } from '../../../../../shared/domain/value-object/uuid'
+import { setupSequelize } from '../../../../../shared/infra/testing/helpers'
 
 describe("CategoryModelMapper Integration Tests", () => {
-  let sequelize;
-
-  beforeEach(async () => {
-    sequelize = new Sequelize({
-      dialect: "sqlite",
-      storage: ":memory:",
-      models: [CategoryModel],
-      logging: false,
-    });
-    await sequelize.sync({ force: true });
-  });
+  setupSequelize({ models: [CategoryModel] });
 
   it("should throws error when category is invalid", () => {
     const model = CategoryModel.build({
@@ -51,7 +42,7 @@ describe("CategoryModelMapper Integration Tests", () => {
     const aggregate = CategoryModelMapper.toEntity(model);
     expect(aggregate.toJSON()).toStrictEqual(
       new Category({
-        categoryId: new UuidValueObject("5490020a-e866-4229-9adc-aa44b83234c4"),
+        categoryId: new Uuid("5490020a-e866-4229-9adc-aa44b83234c4"),
         name: "some value",
         description: "some description",
         isActive: true,
@@ -63,7 +54,7 @@ describe("CategoryModelMapper Integration Tests", () => {
   test("should convert a category aggregate to a category model", () => {
     const createdAt = new Date();
     const aggregate = new Category({
-      categoryId: new UuidValueObject("5490020a-e866-4229-9adc-aa44b83234c4"),
+      categoryId: new Uuid("5490020a-e866-4229-9adc-aa44b83234c4"),
       name: "some value",
       description: "some description",
       isActive: true,

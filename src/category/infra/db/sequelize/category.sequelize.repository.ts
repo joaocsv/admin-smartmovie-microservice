@@ -1,6 +1,6 @@
 import { Op } from 'sequelize'
 import { NotFoundError } from '../../../../shared/domain/errors/not.found.error'
-import { UuidValueObject } from '../../../../shared/domain/value-object/uuid.value.object'
+import { Uuid } from '../../../../shared/domain/value-object/uuid'
 import { Category } from '../../../domain/category'
 import { CategorySearchParams, CategorySearchResult, ICategoryRepository } from '../../../domain/category.repository'
 import { CategoryModel } from './category.model'
@@ -40,7 +40,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     await this.categoryModel.update(modelProps.toJSON(), { where: { category_id: id } })
   }
 
-  async delete(entityId: UuidValueObject): Promise<void> {
+  async delete(entityId: Uuid): Promise<void> {
     const model = await this._get(entityId.value)
     if (!model) {
       throw new NotFoundError(entityId, this.getEntity())
@@ -48,7 +48,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     this.categoryModel.destroy({ where: { category_id: entityId.value } })
   }
   
-  async find(entityId: UuidValueObject): Promise<Category | null> {
+  async find(entityId: Uuid): Promise<Category | null> {
     const model = await this.categoryModel.findByPk(entityId.value)
     return model && CategoryModelMapper.toEntity(model)
   }
