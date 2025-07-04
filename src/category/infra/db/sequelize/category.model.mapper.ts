@@ -8,8 +8,8 @@ export class CategoryModelMapper {
       categoryId: new Uuid(model.category_id),
       name: model.name,
       description: model.description,
-      isActive: model.is_active,
-      createdAt: model.created_at
+      isActive: model.isActive,
+      createdAt: model.createdAt
     })
     Category.validate(entity)
     return entity
@@ -20,8 +20,8 @@ export class CategoryModelMapper {
       category_id: entity.categoryId.value,
       name: entity.name,
       description: entity.description,
-      is_active: entity.isActive,
-      created_at: entity.createdAt
+      isActive: entity.isActive,
+      createdAt: entity.createdAt
     })
   }
 }

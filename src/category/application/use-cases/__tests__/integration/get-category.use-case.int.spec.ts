@@ -32,8 +32,8 @@ describe("GetCategoryUseCase Integration Tests", () => {
       id: category.categoryId.value,
       name: category.name,
       description: category.description,
-      is_active: category.isActive,
-      created_at: category.createdAt,
+      isActive: category.isActive,
+      createdAt: category.createdAt,
     });
   });
 });

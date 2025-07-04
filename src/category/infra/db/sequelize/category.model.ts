@@ -4,8 +4,8 @@ type CategoryModelProps = {
   category_id: string,
   name: string,
   description: string | null,
-  is_active: boolean,
-  created_at: Date
+  isActive: boolean,
+  createdAt: Date
 }
 
 @Table({ tableName: 'categories', timestamps: false })
@@ -21,8 +21,8 @@ export class CategoryModel extends Model<CategoryModelProps> {
   declare description: string | null;
 
   @Column({ allowNull: false, type: DataType.BOOLEAN })
-  declare is_active: boolean;
+  declare isActive: boolean;
 
   @Column({ allowNull: false, type: DataType.DATE(3) })
-  declare created_at: Date;
+  declare createdAt: Date;
 }

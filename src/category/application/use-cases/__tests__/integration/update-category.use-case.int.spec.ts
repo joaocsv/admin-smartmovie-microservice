@@ -36,8 +36,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
       id: entity.categoryId.value,
       name: 'test',
       description: entity.description,
-      is_active: true,
-      created_at: entity.createdAt,
+      isActive: true,
+      createdAt: entity.createdAt,
     });
 
     type Arrange = {
@@ -51,8 +51,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
         id: string;
         name: string;
         description: null | string;
-        is_active: boolean;
-        created_at: Date;
+        isActive: boolean;
+        createdAt: Date;
       };
     };
     const arrange: Arrange[] = [
@@ -66,8 +66,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
           id: entity.categoryId.value,
           name: 'test',
           description: 'some description',
-          is_active: true,
-          created_at: entity.createdAt,
+          isActive: true,
+          createdAt: entity.createdAt,
         },
       },
       {
@@ -79,8 +79,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
           id: entity.categoryId.value,
           name: 'test',
           description: 'some description',
-          is_active: true,
-          created_at: entity.createdAt,
+          isActive: true,
+          createdAt: entity.createdAt,
         },
       },
       {
@@ -93,8 +93,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
           id: entity.categoryId.value,
           name: 'test',
           description: 'some description',
-          is_active: false,
-          created_at: entity.createdAt,
+          isActive: false,
+          createdAt: entity.createdAt,
         },
       },
       {
@@ -106,8 +106,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
           id: entity.categoryId.value,
           name: 'test',
           description: 'some description',
-          is_active: false,
-          created_at: entity.createdAt,
+          isActive: false,
+          createdAt: entity.createdAt,
         },
       },
       {
@@ -120,8 +120,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
           id: entity.categoryId.value,
           name: 'test',
           description: 'some description',
-          is_active: true,
-          created_at: entity.createdAt,
+          isActive: true,
+          createdAt: entity.createdAt,
         },
       },
       {
@@ -135,8 +135,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
           id: entity.categoryId.value,
           name: 'test',
           description: null,
-          is_active: false,
-          created_at: entity.createdAt,
+          isActive: false,
+          createdAt: entity.createdAt,
         },
       },
     ];
@@ -153,14 +153,14 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
         id: entity.categoryId.value,
         name: i.expected.name,
         description: i.expected.description,
-        is_active: i.expected.is_active,
-        created_at: entityUpdated.createdAt,
+        isActive: i.expected.isActive,
+        createdAt: entityUpdated.createdAt,
       });
       expect(entityUpdated.toJSON()).toStrictEqual({
         categoryId: entity.categoryId.value,
         name: i.expected.name,
         description: i.expected.description,
-        isActive: i.expected.is_active,
+        isActive: i.expected.isActive,
         createdAt: entityUpdated.createdAt,
       });
     }

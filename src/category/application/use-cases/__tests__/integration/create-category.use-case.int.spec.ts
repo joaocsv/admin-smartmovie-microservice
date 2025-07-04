@@ -22,8 +22,8 @@ describe("CreateCategoryUseCase Integration Tests", () => {
       id: entity.categoryId.value,
       name: "test",
       description: null,
-      is_active: true,
-      created_at: entity.createdAt,
+      isActive: true,
+      createdAt: entity.createdAt,
     });
 
     output = await useCase.execute({
@@ -35,8 +35,8 @@ describe("CreateCategoryUseCase Integration Tests", () => {
       id: entity.categoryId.value,
       name: "test",
       description: "some description",
-      is_active: true,
-      created_at: entity.createdAt,
+      isActive: true,
+      createdAt: entity.createdAt,
     });
 
     output = await useCase.execute({
@@ -49,8 +49,8 @@ describe("CreateCategoryUseCase Integration Tests", () => {
       id: entity.categoryId.value,
       name: "test",
       description: "some description",
-      is_active: true,
-      created_at: entity.createdAt,
+      isActive: true,
+      createdAt: entity.createdAt,
     });
 
     output = await useCase.execute({
@@ -63,8 +63,8 @@ describe("CreateCategoryUseCase Integration Tests", () => {
       id: entity.categoryId.value,
       name: "test",
       description: "some description",
-      is_active: false,
-      created_at: entity.createdAt,
+      isActive: false,
+      createdAt: entity.createdAt,
     });
   });
 });

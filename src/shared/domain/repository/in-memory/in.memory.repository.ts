@@ -3,7 +3,7 @@ import { NotFoundError } from '../../errors/not.found.error'
 import { ValueObject } from '../../value.object'
 import { IRepository, ISearchableRepository } from '../repository'
 import { SearchParameters, SortDirection } from '../search.parameters'
-import { SearchResponse } from '../search.response'
+import { SearchResult } from '../search.result'
 
 export abstract class InMemoryRepository <E extends Entity, EntityId extends ValueObject> implements IRepository <E, EntityId> {
   entities: E[] = []
@@ -50,11 +50,11 @@ export abstract class InMemoryRepository <E extends Entity, EntityId extends Val
 export abstract class InMemorySearchableRepository<E extends Entity, EntityId extends ValueObject, Filter = string> extends InMemoryRepository<E, EntityId> implements ISearchableRepository<E, EntityId, Filter> {
   abstract sortableFields: string[]
 
-  async search(input: SearchParameters<Filter>): Promise<SearchResponse<E>> {
+  async search(input: SearchParameters<Filter>): Promise<SearchResult<E>> {
     const itemsFiltered = await this.applyFilter(this.entities, input.filter);
     const itemsSorted = this.applySort(itemsFiltered, input.sort, input.sortDir);
     const itemsPaginated = this.applyPaginate(itemsSorted, input.page, input.perPage);
-    return new SearchResponse({
+    return new SearchResult({
       items: itemsPaginated,
       total: itemsFiltered.length,
       currentPage: input.page,

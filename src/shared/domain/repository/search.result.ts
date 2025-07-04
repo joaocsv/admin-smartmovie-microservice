@@ -8,7 +8,7 @@ type SearchResponseConstructorProps<E extends Entity> = {
   perPage: number;
 };
 
-export class SearchResponse<A extends Entity = Entity> extends ValueObject {
+export class SearchResult<A extends Entity = Entity> extends ValueObject {
   readonly items: A[];
   readonly total: number;
   readonly currentPage: number;

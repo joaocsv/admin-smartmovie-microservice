@@ -110,12 +110,12 @@ describe("CategorySequelizeRepository Integration Test", () => {
       );
     });
     it("should order by createdAt DESC when search params are null", async () => {
-      const created_at = new Date();
+      const createdAt = new Date();
       const categories = Category.fake()
         .theCategories(16)
         .withName((index) => `Movie ${index}`)
         .withDescription(null)
-        .withCreatedAt((index) => new Date(created_at.getTime() + index))
+        .withCreatedAt((index) => new Date(createdAt.getTime() + index))
         .build();
 
       await repository.bulkInsert(categories);
@@ -183,7 +183,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
       );
     });
     it("should apply paginate and sort", async () => {
-      expect(repository.sortableFields).toStrictEqual(["name", "created_at"]);
+      expect(repository.sortableFields).toStrictEqual(["name", "createdAt"]);
       const categories = [
         Category.fake().aCategory().withName("b").build(),
         Category.fake().aCategory().withName("a").build(),

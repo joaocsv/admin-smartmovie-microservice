@@ -3,6 +3,7 @@ import { NotFoundError } from '../../../shared/domain/errors/not.found.error'
 import { Uuid } from '../../../shared/domain/value-object/uuid'
 import { Category } from '../../domain/category'
 import { ICategoryRepository } from '../../domain/category.repository'
+import { CategoryOutput, CategoryOutputMapper } from '../commom/category-output'
 
 export class GetCategoryUseCase implements IUseCase<GetCategoryInput, GetCategoryOutput> {
   constructor(private readonly categoryRepository: ICategoryRepository) {}
@@ -14,13 +15,7 @@ export class GetCategoryUseCase implements IUseCase<GetCategoryInput, GetCategor
       throw new NotFoundError(input.id, Category);
     }
 
-    return {
-      id: category.categoryId.value,
-      name: category.name,
-      description: category.description,
-      is_active: category.isActive,
-      created_at: category.createdAt
-    };
+    return CategoryOutputMapper.toOutput(category);
   }
 
 }
@@ -29,10 +24,4 @@ export type GetCategoryInput = {
   id: string;
 };
 
-export type GetCategoryOutput = {
-  id: string;
-  name: string;
-  description?: string | null;
-  is_active: boolean;
-  created_at: Date;
-};
+export type GetCategoryOutput = CategoryOutput;

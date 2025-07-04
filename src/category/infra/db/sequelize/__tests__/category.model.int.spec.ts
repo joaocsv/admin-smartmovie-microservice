@@ -13,8 +13,8 @@ describe("CategoryModel Integration Tests", () => {
       "category_id",
       "name",
       "description",
-      "is_active",
-      "created_at",
+      "isActive",
+      "createdAt",
     ]);
 
     const categoryIdAttr = attributesMap.category_id;
@@ -41,18 +41,18 @@ describe("CategoryModel Integration Tests", () => {
       type: DataType.TEXT(),
     });
 
-    const isActiveAttr = attributesMap.is_active;
+    const isActiveAttr = attributesMap.isActive;
     expect(isActiveAttr).toMatchObject({
-      field: "is_active",
-      fieldName: "is_active",
+      field: "isActive",
+      fieldName: "isActive",
       allowNull: false,
       type: DataType.BOOLEAN(),
     });
 
-    const createdAtAttr = attributesMap.created_at;
+    const createdAtAttr = attributesMap.createdAt;
     expect(createdAtAttr).toMatchObject({
-      field: "created_at",
-      fieldName: "created_at",
+      field: "createdAt",
+      fieldName: "createdAt",
       allowNull: false,
       type: DataType.DATE(3),
     });
@@ -62,8 +62,8 @@ describe("CategoryModel Integration Tests", () => {
     const arrange = {
       category_id: "9366b7dc-2d71-4799-b91c-c64adb205104",
       name: "test",
-      is_active: true,
-      created_at: new Date(),
+      isActive: true,
+      createdAt: new Date(),
     };
     const category = await CategoryModel.create(arrange);
     expect(category.toJSON()).toStrictEqual(arrange);

@@ -7,7 +7,7 @@ import { CategoryModel } from './category.model'
 import { CategoryModelMapper } from './category.model.mapper'
 
 export class CategorySequelizeRepository implements ICategoryRepository {
-  sortableFields: string[] = ['name', 'created_at'];
+  sortableFields: string[] = ['name', 'createdAt'];
 
   constructor (private readonly categoryModel: typeof CategoryModel) {}
 
@@ -67,7 +67,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
       ...(params.filter && { where: { name: { [Op.like]: `%${params.filter}%` } } }),
       ...(params.sort && this.sortableFields.includes(params.sort)
         ? { order: [[params.sort, params.sortDir]] }
-        : { order: [['created_at', 'desc']] }),
+        : { order: [['createdAt', 'desc']] }),
       limit,
       offset
     })

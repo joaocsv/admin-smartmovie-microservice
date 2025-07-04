@@ -1,7 +1,7 @@
 import { Entity } from '../../../../domain/entity';
 import { Uuid } from '../../../value-object/uuid'
 import { SearchParameters } from '../../search.parameters'
-import { SearchResponse } from '../../search.response'
+import { SearchResult } from '../../search.result'
 import { InMemorySearchableRepository } from '../in.memory.repository'
 
 type StubEntityConstructorProps = {
@@ -155,7 +155,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
 
       const result = await repository.search(new SearchParameters());
       expect(result).toStrictEqual(
-        new SearchResponse({
+        new SearchResult({
           items: Array(15).fill(entity),
           total: 16,
           currentPage: 1,
@@ -177,7 +177,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
         new SearchParameters({ page: 1, perPage: 2, filter: 'TEST' }),
       );
       expect(result).toStrictEqual(
-        new SearchResponse({
+        new SearchResult({
           items: [items[0], items[2]],
           total: 3,
           currentPage: 1,
@@ -189,7 +189,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
         new SearchParameters({ page: 2, perPage: 2, filter: 'TEST' }),
       );
       expect(result).toStrictEqual(
-        new SearchResponse({
+        new SearchResult({
           items: [items[3]],
           total: 3,
           currentPage: 2,
@@ -213,7 +213,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
             perPage: 2,
             sort: 'name',
           }),
-          search_result: new SearchResponse({
+          search_result: new SearchResult({
             items: [items[1], items[0]],
             total: 5,
             currentPage: 1,
@@ -226,7 +226,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
             perPage: 2,
             sort: 'name',
           }),
-          search_result: new SearchResponse({
+          search_result: new SearchResult({
             items: [items[4], items[2]],
             total: 5,
             currentPage: 2,
@@ -240,7 +240,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
             sort: 'name',
             sortDir: 'desc',
           }),
-          search_result: new SearchResponse({
+          search_result: new SearchResult({
             items: [items[3], items[2]],
             total: 5,
             currentPage: 1,
@@ -254,7 +254,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
             sort: 'name',
             sortDir: 'desc',
           }),
-          search_result: new SearchResponse({
+          search_result: new SearchResult({
             items: [items[4], items[0]],
             total: 5,
             currentPage: 2,
@@ -294,7 +294,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
             sort: 'name',
             filter: 'TEST',
           }),
-          result: new SearchResponse({
+          result: new SearchResult({
             items: [items[2], items[4]],
             total: 3,
             currentPage: 1,
@@ -308,7 +308,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
             sort: 'name',
             filter: 'TEST',
           }),
-          result: new SearchResponse({
+          result: new SearchResult({
             items: [items[0]],
             total: 3,
             currentPage: 2,

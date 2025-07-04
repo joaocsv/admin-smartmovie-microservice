@@ -18,8 +18,8 @@ describe('CreateCategoryUseCase Unit Tests', () => {
       id: repository.entities[0].categoryId.value,
       name: 'test',
       description: null,
-      is_active: true,
-      created_at: repository.entities[0].createdAt,
+      isActive: true,
+      createdAt: repository.entities[0].createdAt,
     });
 
     output = await useCase.execute({
@@ -32,8 +32,8 @@ describe('CreateCategoryUseCase Unit Tests', () => {
       id: repository.entities[1].categoryId.value,
       name: 'test',
       description: 'some description',
-      is_active: false,
-      created_at: repository.entities[1].createdAt,
+      isActive: false,
+      createdAt: repository.entities[1].createdAt,
     });
   });
 });

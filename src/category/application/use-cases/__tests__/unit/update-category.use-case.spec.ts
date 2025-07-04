@@ -40,8 +40,8 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
       id: entity.categoryId.value,
       name: "test",
       description: null,
-      is_active: true,
-      created_at: entity.createdAt,
+      isActive: true,
+      createdAt: entity.createdAt,
     });
 
     type Arrange = {
@@ -49,14 +49,14 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
         id: string;
         name: string;
         description?: null | string;
-        is_active?: boolean;
+        isActive?: boolean;
       };
       expected: {
         id: string;
         name: string;
         description: null | string;
-        is_active: boolean;
-        created_at: Date;
+        isActive: boolean;
+        createdAt: Date;
       };
     };
     const arrange: Arrange[] = [
@@ -70,8 +70,8 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
           id: entity.categoryId.value,
           name: "test",
           description: "some description",
-          is_active: true,
-          created_at: entity.createdAt,
+          isActive: true,
+          createdAt: entity.createdAt,
         },
       },
       {
@@ -83,22 +83,22 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
           id: entity.categoryId.value,
           name: "test",
           description: "some description",
-          is_active: true,
-          created_at: entity.createdAt,
+          isActive: true,
+          createdAt: entity.createdAt,
         },
       },
       {
         input: {
           id: entity.categoryId.value,
           name: "test",
-          is_active: false,
+          isActive: false,
         },
         expected: {
           id: entity.categoryId.value,
           name: "test",
           description: "some description",
-          is_active: false,
-          created_at: entity.createdAt,
+          isActive: false,
+          createdAt: entity.createdAt,
         },
       },
       {
@@ -110,22 +110,22 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
           id: entity.categoryId.value,
           name: "test",
           description: "some description",
-          is_active: false,
-          created_at: entity.createdAt,
+          isActive: false,
+          createdAt: entity.createdAt,
         },
       },
       {
         input: {
           id: entity.categoryId.value,
           name: "test",
-          is_active: true,
+          isActive: true,
         },
         expected: {
           id: entity.categoryId.value,
           name: "test",
           description: "some description",
-          is_active: true,
-          created_at: entity.createdAt,
+          isActive: true,
+          createdAt: entity.createdAt,
         },
       },
       {
@@ -133,14 +133,14 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
           id: entity.categoryId.value,
           name: "test",
           description: "some description",
-          is_active: false,
+          isActive: false,
         },
         expected: {
           id: entity.categoryId.value,
           name: "test",
           description: "some description",
-          is_active: false,
-          created_at: entity.createdAt,
+          isActive: false,
+          createdAt: entity.createdAt,
         },
       },
     ];
@@ -150,14 +150,14 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
         id: i.input.id,
         ...("name" in i.input && { name: i.input.name }),
         ...("description" in i.input && { description: i.input.description }),
-        ...("is_active" in i.input && { isActive: i.input.is_active }),
+        ...("isActive" in i.input && { isActive: i.input.isActive }),
       });
       expect(output).toStrictEqual({
         id: entity.categoryId.value,
         name: i.expected.name,
         description: i.expected.description,
-        is_active: i.expected.is_active,
-        created_at: i.expected.created_at,
+        isActive: i.expected.isActive,
+        createdAt: i.expected.createdAt,
       });
     }
   });

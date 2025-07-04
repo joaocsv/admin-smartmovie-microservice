@@ -3,6 +3,7 @@ import { NotFoundError } from '../../../shared/domain/errors/not.found.error'
 import { Uuid } from '../../../shared/domain/value-object/uuid'
 import { Category } from '../../domain/category'
 import { ICategoryRepository } from '../../domain/category.repository'
+import { CategoryOutput, CategoryOutputMapper } from '../commom/category-output'
 
 export class UpdateCategoryUseCase implements IUseCase<UpdateCategoryInput, UpdateCategoryOutput> {
   constructor(private readonly categoryRepository: ICategoryRepository) {}
@@ -30,13 +31,7 @@ export class UpdateCategoryUseCase implements IUseCase<UpdateCategoryInput, Upda
 
     await this.categoryRepository.update(category);
 
-    return {
-      id: category.categoryId.value,
-      name: category.name,
-      description: category.description,
-      is_active: category.isActive,
-      created_at: category.createdAt,
-    };
+    return CategoryOutputMapper.toOutput(category);
   }
 }
 
@@ -48,10 +43,4 @@ export type UpdateCategoryInput = {
   isActive?: boolean;
 }
 
-export type UpdateCategoryOutput = {
-  id: string;
-  name: string;
-  description?: string | null;
-  is_active: boolean;
-  created_at: Date;
-}
+export type UpdateCategoryOutput = CategoryOutput;

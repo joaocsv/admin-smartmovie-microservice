@@ -34,8 +34,8 @@ describe("GetCategoryUseCase Unit Tests", () => {
       id: items[0].categoryId.value,
       name: "Movie",
       description: null,
-      is_active: true,
-      created_at: items[0].createdAt,
+      isActive: true,
+      createdAt: items[0].createdAt,
     });
   });
 });

@@ -142,7 +142,7 @@ describe('CategoryFakerBuilder Unit Tests', () => {
     });
   });
 
-  describe('is_active prop', () => {
+  describe('isActive prop', () => {
     const faker = CategoryFakeBuilder.aCategory();
     test('should be a function', () => {
       expect(typeof faker['_isActive']).toBe('function');

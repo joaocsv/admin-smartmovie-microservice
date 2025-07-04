@@ -36,8 +36,8 @@ describe("CategoryModelMapper Integration Tests", () => {
       category_id: "5490020a-e866-4229-9adc-aa44b83234c4",
       name: "some value",
       description: "some description",
-      is_active: true,
-      created_at: createdAt,
+      isActive: true,
+      createdAt: createdAt,
     });
     const aggregate = CategoryModelMapper.toEntity(model);
     expect(aggregate.toJSON()).toStrictEqual(
@@ -65,8 +65,8 @@ describe("CategoryModelMapper Integration Tests", () => {
       category_id: "5490020a-e866-4229-9adc-aa44b83234c4",
       name: "some value",
       description: "some description",
-      is_active: true,
-      created_at: createdAt,
+      isActive: true,
+      createdAt: createdAt,
     });
   });
 });
